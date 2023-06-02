@@ -2,59 +2,60 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cumulative from 1 after page loaded </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>cumulative from 1 after page loaded </title>
 
-    <style>
-        div {
-            text-align: center;
-            font-size: 100px;
-            padding: 100px;
-        }
-        
-        button {
-            display: block;
-            margin: 50px auto;
-            width: 500px;
-            height: 100px;
-            font-size: 30px;
-        }
-        
-        span {
-            color: crimson
-        }
-    </style>
+ <style>
+ div {
+ text-align: center;
+ font-size: 100px;
+ padding: 100px;
+ }
+ 
+ button {
+ display: block;
+ margin: 50px auto;
+ width: 500px;
+ height: 100px;
+ font-size: 30px;
+ }
+ 
+ span {
+color: crimson
+ } </style>
 
 </head>
 
 <body>
-    <button onclick="timing()">Timing start</button>
-    <button onclick="stop()">Timing stop</button>
-    <div id="demo">
+ <button onclick="timing()" >Timing start</button>
+ 
+ <div id="demo">
 
-    </div>
+</div>
 
-    <script>
-        var oBody = document.getElementById("demo");
-        var i = 0;
-       
-        function timing() {
-            setInterval(updateNum, 1000);
-            
-            updateNum();
-            
-        }
-       
-        function updateNum() {
-                var j = i++;
-                oBody.innerHTML = "Time passed: " + "<span>" + j + "</span>" + " s";
-            }
-       
-      function stop() {
-    clearInterval(oBody);
-    oBody = null;
-  }
-    </script>
+<script>
+var oBody = document.getElementById("demo");
+ var i = 0;
+ var intervalID;
+var Paused = false;
+
+function timing() {
+ if(!Paused){
+ intervalID = setInterval(updateNum,1000);
+ updateNum();
+ Paused = true;
+ }
+ else{
+ clearInterval(intervalID);
+ Paused = false;
+ }
+ }
+ 
+ function updateNum() {
+ var j = i++;
+oBody.innerHTML = "Time passed: " + "<span>" + j + "</span>" + " s";
+ }
+ </script>
 </body>
 
 </html>
